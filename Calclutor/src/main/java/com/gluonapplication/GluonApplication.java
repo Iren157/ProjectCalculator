@@ -8,7 +8,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -30,49 +29,72 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 public class GluonApplication extends Application {
 	Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
-	 boolean operatorAlreadyPressed = false;
-		TextField t = new TextField();
+	/* 
+	 * t is a textField for reading and showing the result of any operation
+	 * */
+	Button bback = new Button("Back");
+
+	 TextField t = new TextField();
+	 /* 
+		 * t is a label for showing any error
+		 * */
 		Label l=new Label();
-		double []text=new double[5];
-		String []sym= new String[5];
-		static int ii=0;
-		HBox r6 =new HBox();
+		
+		/* 
+		 * the final result of operation
+		 * */
 		double result=0;
+		/* 
+		 * this method takes in a stage and show the form 
+		 * 
+		 * */
+		Stage calc = new Stage();
+		  
 public void start(Stage primaryStage) {
 	
 	// --------------- Animation -----------------
-StackPane pane = new StackPane();
-Circle circle1 = new Circle(1);
-circle1.setStroke(Color.BLACK);
-circle1.centerXProperty().bind(pane.widthProperty().divide(2));
-circle1.centerYProperty().bind(pane.heightProperty().divide(2));
-
+	/* 
+	 * interface pane 
+	 */
 //-----------------------Listview -----------------------------
-String[] flagTitles = {"Alaa Ali  \n kkfjfkbj fkgjfgjkfgj", "Ereeny Anwer \n jfghkjfghfgjfghkjh", "Eva Magdy \n fjghfkjghfkjghkj",
-"Monica Adel \n fhgkjfdghkjfdgh", "Engy Kamil \n jfkghgh"};
-// Declare an ImageView array for the national flags of 9 countries
+String[] flagTitles = {"Alaa Ali  \n Coding", "Ereeny Anwer \n android", "Eva Magdy \n design and interface",
+"Monica Adel \n design and interface", "Engy Kamil \n coding"};
+
 ImageView[] ImageViews = {
-new ImageView("1.png"),
-new ImageView("2.png"),
 new ImageView("3.png"),
-new ImageView("4.png"),
-new ImageView("5.png"),
+new ImageView("4.JPG"),
+new ImageView("2.png"),
+new ImageView("3.jpg"),
+new ImageView("1.jpg"),
 
 };
+ImageViews[0].setFitWidth(250);
+ImageViews[1].setFitWidth(250);
+ImageViews[2].setFitWidth(250);
+ImageViews[3].setFitWidth(250);
+ImageViews[4].setFitWidth(250);
+ImageViews[0].setFitHeight(250);
+ImageViews[1].setFitHeight(250);
+ImageViews[2].setFitHeight(500);
+ImageViews[3].setFitHeight(250);
+ImageViews[4].setFitHeight(250);
 
-
+visualBounds.getHeight();
+visualBounds.getWidth();
 ListView<String> lv = new ListView<>
 (FXCollections.observableArrayList(flagTitles));
-lv.setPrefSize(300, 480);
+lv.setPrefSize(200, 400);
 lv.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-// Create a pane to hold image views
-FlowPane imagePane = new FlowPane(5, 5);
-
+/*
+ *  Create a pane to hold image views
+ */
+HBox imagePane = new HBox(5);
 BorderPane pane3 = new BorderPane();
 pane3.setLeft(new ScrollPane(lv));
-pane3.setCenter(imagePane);
+pane3.setRight(imagePane);
 lv.getSelectionModel().selectedItemProperty().addListener(
 ov -> {
 imagePane.getChildren().clear();
@@ -84,7 +106,7 @@ imagePane.getChildren().add(ImageViews[i]);
 
 
 Button back = new Button("Back");
-back.setMaxWidth(Double.MAX_VALUE);
+back.setMaxWidth(480);
 back.setMaxHeight(100);
 pane3.setBottom(back);
 
@@ -99,123 +121,212 @@ back.setOnAction(e->{
 });
 
 //------------------------- Calculator Stage --------------------
+/* 
+ * pane for calculator stage
+ */
 VBox panee = new VBox();
+/* 
+ * for buttons
+ */
 HBox r1 =new HBox();
 t.setPrefWidth(480);
-t.setPrefHeight(150);
+t.setPrefHeight(100);
 t.setEditable(false);
+/* 
+ * for buttons
+ */
 HBox r2 =new HBox();
+HBox r7=new HBox();
+/* 
+ * r6 is a HBox for adding the label that show any error
+ */
 HBox r6 =new HBox();
 r6.getChildren().add(l);
 r6.setAlignment(Pos.CENTER);
+/* 
+ * for button 1
+ */
+r7.getChildren().add(bback);
+r7.setAlignment(Pos.CENTER);
 Button n1 = new Button("1");
 n1.setPrefWidth(80);
 n1.setPrefHeight(130);
 n1.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n1.setTextFill(Color.WHITE);
+/* 
+ * for button 2
+ */
 Button n2 = new Button("2");
 n2.setPrefWidth(80);
 n2.setPrefHeight(130);
 n2.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n2.setTextFill(Color.WHITE);
+/* 
+ * for button 3
+ */
 Button n3 = new Button("3");
 n3.setPrefWidth(80);
 n3.setPrefHeight(130);
 n3.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n3.setTextFill(Color.WHITE);
-Button s1 = new Button("%");
+/* 
+ * for button /
+ */
+Button s1 = new Button("/");
 s1.setPrefWidth(80);
 s1.setPrefHeight(130);
 s1.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s1.setTextFill(Color.BROWN);
+/* 
+ * for button clear digit
+ */
 Button s2 = new Button("CE");
 s2.setPrefWidth(80);
 s2.setPrefHeight(130);
 s2.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s2.setTextFill(Color.BROWN);
+/* 
+ * for button clear all
+ */
 Button s3 = new Button("CL");
 s3.setPrefWidth(80);
 s3.setPrefHeight(130);
 s3.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s3.setTextFill(Color.BROWN);
 HBox r3 =new HBox();
+/* 
+ * for button 4
+ */
 Button n4 = new Button("4");
 n4.setPrefWidth(80);
 n4.setPrefHeight(130);
 n4.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n4.setTextFill(Color.WHITE);
+/* 
+ * for button 5
+ */
 Button n5 = new Button("5");
 n5.setPrefWidth(80);
 n5.setPrefHeight(130);
 n5.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n5.setTextFill(Color.WHITE);
+/* 
+ * for button 6
+ */
 Button n6 = new Button("6");
 n6.setPrefWidth(80);
 n6.setPrefHeight(130);
 n6.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n6.setTextFill(Color.WHITE);
+/* 
+ * for button multiply
+ */
 Button s4 = new Button("*");
 s4.setPrefWidth(80);
 s4.setPrefHeight(130);
 s4.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s4.setTextFill(Color.BROWN);
+/* 
+ * for button (
+ */
 Button s5 = new Button("(");
 s5.setPrefWidth(80);
 s5.setPrefHeight(130);
 s5.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s5.setTextFill(Color.BROWN);
+/* 
+ * for button )
+ */
 Button s6 = new Button(")");
 s6.setPrefWidth(80);
 s6.setPrefHeight(130);
 s6.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s6.setTextFill(Color.BROWN);
 HBox r4 =new HBox();
+/* 
+ * for button 7
+ */
 Button n7 = new Button("7");
 n7.setPrefWidth(80);
 n7.setPrefHeight(130);
 n7.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n7.setTextFill(Color.WHITE);
+/* 
+ * for button 8
+ */
 Button n8 = new Button("8");
 n8.setPrefWidth(80);
 n8.setPrefHeight(130);
 n8.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n8.setTextFill(Color.WHITE);
+/* 
+ * for button 9
+ */
 Button n9 = new Button("9");
 n9.setPrefWidth(80);
 n9.setPrefHeight(130);
 n9.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n9.setTextFill(Color.WHITE);
+/* 
+ * for button -
+ */
 Button s7 = new Button("-");
 s7.setPrefWidth(80);
 s7.setPrefHeight(130);
 s7.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s7.setTextFill(Color.BROWN);
+/* 
+ * for button power
+ */
 Button s8 = new Button("x\u00B2");
 s8.setPrefWidth(80);
 s8.setPrefHeight(130);
 s8.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s8.setTextFill(Color.BROWN);
+/* 
+ * for button squr
+ */
 Button s9 = new Button("\u221A");
 s9.setPrefWidth(80);
 s9.setPrefHeight(130);
 s9.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s9.setTextFill(Color.BROWN);
 HBox r5 =new HBox();
+/* 
+ * for button 0
+ */
 Button n0 = new Button("0");
-n0.setPrefWidth(160);
+n0.setPrefWidth(80);
 n0.setPrefHeight(130);
 n0.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
 n0.setTextFill(Color.WHITE);
+/* 
+ * for button .
+ */
 Button n11 = new Button(".");
 n11.setPrefWidth(80);
 n11.setPrefHeight(130);
 n11.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 n11.setTextFill(Color.BROWN);
+/* 
+ * for button +
+ */
 Button s0 = new Button("+");
 s0.setPrefWidth(80);
 s0.setPrefHeight(130);
 s0.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
 s0.setTextFill(Color.BROWN);
+/*
+*for button %
+*/
+ Button n0 = new Button("%");
+n0.setPrefWidth(80);
+n0.setPrefHeight(130);
+n0.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
+n0.setTextFill(Color.WHITE);
+/* 
+ * for button =
+ */
 Button s11 = new Button("=");
 s11.setPrefWidth(160);
 s11.setPrefHeight(130);
@@ -231,6 +342,12 @@ r2.setAlignment(Pos.CENTER);
 r3.setAlignment(Pos.CENTER);
 r4.setAlignment(Pos.CENTER);
 r5.setAlignment(Pos.CENTER);
+bback.setPrefWidth(480);
+bback.setPrefHeight(40);
+bback.setOnAction(e->{
+	calc.close();
+	primaryStage.show();
+});
 n1.setOnAction(e -> setnum(n1.getText()));
 n2.setOnAction(e -> setnum(n2.getText()));
 n3.setOnAction(e -> setnum(n3.getText()));
@@ -267,6 +384,7 @@ s11.setOnAction(e -> {new Thread(new Runnable(){
         }
         catch(Exception e)
     	{
+        	result=0;
         	Platform.runLater(new Runnable() { // Run from JavaFX GUI
         		 @Override
         		 public void run() {
@@ -284,14 +402,14 @@ s11.setOnAction(e -> {new Thread(new Runnable(){
          Thread.sleep(200);
 		}
 		catch (Exception ex) {
+			result=0;
 			 l.setText("Invaild operation");
 	        	
 		}
 		}}).start();
 });
-   panee.getChildren().addAll(r1,r2,r3,r4,r5,r6);
+   panee.getChildren().addAll(r1,r2,r3,r4,r5,r6,r7);
   Scene scene = new Scene(panee,visualBounds.getWidth(),visualBounds.getHeight());
-  Stage calc = new Stage();
     calc.setTitle("Calculator"); // Set the stage title
     calc.setScene(scene); // Place the scene in the stage
     primaryStage.setResizable(false);
@@ -372,9 +490,13 @@ strtclc.setOnAction(e->{
 	primaryStage.close();
 	calc.show();
 });
+Button exit = new Button ("exit");
+exit.setOnAction(e->{
+	primaryStage.close();
 
+});
 VBox vbox= new VBox(20);
-vbox.getChildren().addAll(strtclc,abtus);
+vbox.getChildren().addAll(strtclc,abtus,exit);
 vbox.setAlignment(Pos.CENTER);
 vbox.setPadding(new Insets(20));
 
@@ -387,7 +509,11 @@ primaryStage.setScene(primaryscene); // Place the scene in the stage
 primaryStage.show(); // Display the stage
 }
 
-
+/* 
+ * this method takes in a string a and compute the power
+ * @param a to power
+ * @throw if enter invalid char
+ */
 public void power (String a)
 {
 	try {
@@ -398,6 +524,11 @@ public void power (String a)
     	{
     		l.setText("Invaild Operation");
     	}}
+/* 
+ * this method takes in a string a and compute the squr
+ * @param a to squr
+ * @throw if enter invalid char
+ */
 public void squr (String a)
 {// try / catch here
 	try{double s=Double.parseDouble(a);
@@ -408,17 +539,28 @@ public void squr (String a)
 		l.setText("Invaild Operation");
 	}
 }
+/* 
+ * this method clear one digit from textField
+ */
 public void clear ()
 {
 	if (t.getLength()>0)
 	t.setText(t.getText().substring( 0, t.getText().length()-1));
 	
 }
+/* 
+ * this method clear all from textField
+ */
 public void clearall()
 {
+	result=0;
 	t.clear();
     l.setText("");
 }
+/* 
+ * this method takes in a string a and show the digit in textField
+ * @param a to add to it
+ */
 public void setnum (String a)
 {
 	 String s=t.getText()+a;
