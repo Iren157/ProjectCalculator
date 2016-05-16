@@ -306,8 +306,8 @@ n0.setTextFill(Color.WHITE);
 Button n11 = new Button(".");
 n11.setPrefWidth(80);
 n11.setPrefHeight(130);
-n11.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
-n11.setTextFill(Color.BROWN);
+n11.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
+n11.setTextFill(Color.WHITE);
 /* 
  * for button +
  */
@@ -319,11 +319,11 @@ s0.setTextFill(Color.BROWN);
 /*
 *for button %
 */
- Button n0 = new Button("%");
-n0.setPrefWidth(80);
-n0.setPrefHeight(130);
-n0.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: brown");
-n0.setTextFill(Color.WHITE);
+ Button n_1 = new Button("%");
+n_1.setPrefWidth(80);
+n_1.setPrefHeight(130);
+n_1.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-background-color: FEDCBA");
+n_1.setTextFill(Color.BROWN);
 /* 
  * for button =
  */
@@ -336,7 +336,7 @@ r1.getChildren().add(t);
 r2.getChildren().addAll(n1,n2,n3,s1,s2,s3);
 r3.getChildren().addAll(n4,n5,n6,s4,s5,s6);
 r4.getChildren().addAll(n7,n8,n9,s7,s8,s9);
-r5.getChildren().addAll(n0,n11,s0,s11);
+r5.getChildren().addAll(n11,n0,n_1,s0,s11);
 r1.setAlignment(Pos.CENTER);
 r2.setAlignment(Pos.CENTER);
 r3.setAlignment(Pos.CENTER);
@@ -359,6 +359,7 @@ n8.setOnAction(e -> setnum(n8.getText()));
 n9.setOnAction(e -> setnum(n9.getText()));
 n11.setOnAction(e ->setnum(n11.getText()));
 n0.setOnAction(e -> setnum(n0.getText()));
+n_1.setOnAction(e -> setnum(n_1.getText()));
 s0.setOnAction(e -> setnum(s0.getText()));
 s1.setOnAction(e -> setnum(s1.getText()));
 s2.setOnAction(e ->  clear() );
